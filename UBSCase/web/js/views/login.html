@@ -1,0 +1,10 @@
+<div ng-controller="LoginController">
+    <h1>Test</h1>
+    <form name='loginForm' ng-submit="authenticateUser()" method='POST' novalidate>
+        <label for='username'>Username: </label><input type="text" ng-model="credentials.username"><br>
+        <label for='password'>Password: </label><input type="password" ng-model="credentials.password"><br>
+        <button type='submit'>Submit</button>
+    </form>
+    <button ng-click="register()">Register</button><br>
+    <font color='red'>{{result}}</font>
+</div>
