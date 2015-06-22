@@ -1,13 +1,14 @@
-var app = angular.module("ebonline", ['ui.router', 'ngCookies']);
+var app = angular.module("UBSCase", ['ui.router', 'ngCookies']);
 
 
 // For Application Routing
 app.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
     $urlRouterProvider.otherwise("/");
     $locationProvider.html5Mode(true);
+    console.log("Here");
     $stateProvider
-            .state('dashboard', {
-                url: "/dashboard",
+            .state('/dashboard', {
+                url: "/UBSCase/dashboard",
                 controller: 'DashboardController',
                 templateUrl: 'js/views/dashboard.html',
                 data: {
@@ -46,7 +47,8 @@ app.run(function($rootScope, $location, $cookieStore) {
         if (requireLogin && typeof $rootScope.currentUser === 'undefined') {
             event.preventDefault();
             // get me a login modal!
-            $location.path("/");
+            console.log("redirected here");
+            $location.path("/UBSCase");
         }
     });
 
@@ -57,8 +59,7 @@ app.config(function($httpProvider) {
     //fancy random token
     function b(a) {
         return a ? (a ^ Math.random() * 16 >> a / 4).toString(16) : ([1e16] + 1e16).replace(/[01]/g, b)
-    }
-    ;
+    };
 
     $httpProvider.interceptors.push(function() {
         return {
@@ -72,19 +73,19 @@ app.config(function($httpProvider) {
 });
 
 app.constant('USER_ROLES', {
-    all: '*',
-    admin: 'admin',
-    editor: 'editor',
-    guest: 'guest'
+  all: '*',
+  admin: 'admin',
+  editor: 'editor',
+  guest: 'guest'
 });
 
 app.constant('AUTH_EVENTS', {
-    loginSuccess: 'auth-login-success',
-    loginFailed: 'auth-login-failed',
-    logoutSuccess: 'auth-logout-success',
-    sessionTimeout: 'auth-session-timeout',
-    notAuthenticated: 'auth-not-authenticated',
-    notAuthorized: 'auth-not-authorized'
+  loginSuccess: 'auth-login-success',
+  loginFailed: 'auth-login-failed',
+  logoutSuccess: 'auth-logout-success',
+  sessionTimeout: 'auth-session-timeout',
+  notAuthenticated: 'auth-not-authenticated',
+  notAuthorized: 'auth-not-authorized'
 });
 
 
