@@ -2,79 +2,94 @@ var app = angular.module("UBSCase", ['ui.router', 'ngCookies']);
 
 
 // For Application Routing
-app.config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
-    $urlRouterProvider.otherwise("/");
+app.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
+    $urlRouterProvider.otherwise("/UBSCase/");
     $locationProvider.html5Mode(true);
-    console.log("Here");
     $stateProvider
-            .state('/', {
-                url: '/',
+            .state('dashboard', {
+                url: "/dashboard",
                 controller: 'DashboardController',
                 templateUrl: 'js/views/dashboard.html',
+                data: {
+                    requireLogin: true
+                }
+            })
+            .state('register', {
+                url: '/register',
+                controller: "RegistrationController",
+                templateUrl: "js/views/register.html",
                 data: {
                     requireLogin: false
                 }
             })
-            /*
-             .state('/', {
-             url: '/',
-             controller: 'LoginController',
-             templateUrl: 'js/views/login.html',
-             data: {
-             requireLogin: false
-             }
-             })
-             */
-            .state('/portfolio', {
-                url: '/UBSCase/portfolio',
-                controller: "DashboardController",
+            .state('portfolio', {
+                url: '/portfolio',
                 templateUrl: "js/views/portfolio.html",
+                data: {
+                    requireLogin: false
+                }
+            })
+            .state('/UBSCase/', {
+                url: '/',
+                controller: "LoginController",
+                templateUrl: "js/views/login.html",
+                data: {
+                    requireLogin: false
+                }
+            })
+            .state('/logout', {
+                url: '/',
+                controller: "LoginController",
+                templateUrl: "js/views/login.html",
                 data: {
                     requireLogin: false
                 }
             });
 
-
 });
 
+
 // For managing state changes
-app.run(function ($rootScope, $location, $cookieStore) {
-    $rootScope.$on('$stateChangeStart', function (event, toState, toParams) {
+app.run(function($rootScope, $location, $cookieStore) {
+    $rootScope.$on('$stateChangeStart', function(event, toState, toParams) {
         var requireLogin = toState.data.requireLogin;
-        var isRefreshed = typeof $rootScope.currentUser === 'undefined';
-        console.log("logging cookie!" + $cookieStore.get("user"));
-        var isLoggedIn = $cookieStore.get("user") !== undefined;
-        console.log(isRefreshed);
+        //var isRefreshed = typeof $rootScope.currentUser === 'undefined';
+        //console.log("logging cookie!" + $cookieStore.get("user"));
+        var isLoggedIn = typeof $cookieStore.get("user") !== 'undefined';
+        //console.log("is logged in at 60?" + isLoggedIn);
 
-        if (isRefreshed && isLoggedIn) {
-            console.log("Adding cookie details!");
-            $rootScope.setCurrentUser($cookieStore.get("user"));
-        }
-
-        console.log($rootScope.currentUser);
-        console.log($rootScope.currentUser === 'undefined');
-
-        if (requireLogin && typeof $rootScope.currentUser === 'undefined') {
+        if (requireLogin && !isLoggedIn) {
+            //console.log("line 63");
             event.preventDefault();
             // get me a login modal!
-            console.log("redirected here");
-            $location.path("/UBSCase");
+            $location.path("/");
+        } else if (!requireLogin) {
+            //console.log(toState.data.url);
+            //console.log("is logged in at 69?" +isLoggedIn);
+            if (toState.data.url === '/logout') {
+                //console.log("Resetting rootScope user");
+                
+            } else if (isLoggedIn) {
+                //console.log(isLoggedIn + " at 73");
+                $rootScope.setCurrentUser($cookieStore.get("user"));
+                $location.path("dashboard");
+            }
         }
     });
 
 });
 
 // for CSRF
-app.config(function ($httpProvider) {
+app.config(function($httpProvider) {
     //fancy random token
     function b(a) {
         return a ? (a ^ Math.random() * 16 >> a / 4).toString(16) : ([1e16] + 1e16).replace(/[01]/g, b)
     }
     ;
 
-    $httpProvider.interceptors.push(function () {
+    $httpProvider.interceptors.push(function() {
         return {
-            'request': function (config) {
+            'request': function(config) {
                 // put a new random secret into our CSRF-TOKEN Cookie after each response
                 document.cookie = 'CSRF-TOKEN=' + b();
                 return config;

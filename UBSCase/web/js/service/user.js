@@ -2,7 +2,7 @@ app.service('UserService', function($http, Session) {
     var userService = {};
 
     userService.authenticate = function(credentials) {
-        console.log("called");
+        
         return $http.post('/auth/login', credentials).then(function(res) {
                 return res;
         });

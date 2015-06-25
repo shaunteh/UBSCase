@@ -1,21 +1,19 @@
-app.controller('DashboardController', function ($scope, $location, $rootScope, UserService, Session) {
+app.controller('DashboardController', function ($scope, $location, $rootScope, Session) {
     $scope.logout = function () {
         Session.destroy();
         $rootScope.removeCurrentUser();
-        console.log("DashboardController logout Clicked");
-        UserService.logout().then(function () {
-            console.log("Successfully logged out");
-            $location.path("/UBSCase/");
-        }, function (res) {
-            console.log("Error Value");
-
-        });
+        $location.path("/UBSCase/");
     };
 
     $scope.navigate = function () {
         console.log("clicked on portfolio tab");
         $location.path("portfolio");
-    }
+    };
+    
+    $scope.dashboard = function(){
+        console.log("CAlled");
+        $location.path("dashboard");
+    };
 
     /*! AdminLTE app.js
      * ================

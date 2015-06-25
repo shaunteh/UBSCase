@@ -9,4 +9,7 @@ app.controller('ApplicationController', function($rootScope, USER_ROLES, UserSer
         $rootScope.currentUser = user;
     };
     
+    $rootScope.removeCurrentUser = function(){
+        $cookieStore.remove("user");
+    };
 });
