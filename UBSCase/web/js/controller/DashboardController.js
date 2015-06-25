@@ -324,14 +324,14 @@ app.controller('DashboardController', function ($scope, $location, $rootScope, S
          */
         $.AdminLTE.pushMenu = {
             activate: function (toggleBtn) {
-                console.log("pushMenu");
+                //console.log("pushMenu");
                 //Get the screen sizes
                 var screenSizes = $.AdminLTE.options.screenSizes;
 
                 //Enable sidebar toggle
                 $(toggleBtn).on('click', function (e) {
                     e.preventDefault();
-                    console.log("clickedMenu");
+                    //console.log("clickedMenu");
                     //Enable sidebar push menu
                     if ($(window).width() > (screenSizes.sm - 1)) {
                         $("body").toggleClass('sidebar-collapse');
@@ -400,7 +400,7 @@ app.controller('DashboardController', function ($scope, $location, $rootScope, S
          */
         $.AdminLTE.tree = function (menu) {
             var _this = this;
-            console.log("TESTT");
+            //console.log("TESTT");
             var animationSpeed = $.AdminLTE.options.animationSpeed;
             $("li a", $(menu)).on('click', function (e) {
                 //Get the clicked link and the next element

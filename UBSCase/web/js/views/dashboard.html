@@ -110,7 +110,7 @@
                                         <th>Value in (USD)</th>
                                         <th>100%</th>
                                     </tr>
-                                    <tr ng-repeat="investment in portfolio.investments">
+                                    <tr ng-repeat="investment in portfolio.investments | orderBy:'value':true">
                                         <td>{{investment.type}}</td>
                                         <td>
                                             ${{investment.value | number : 2}}

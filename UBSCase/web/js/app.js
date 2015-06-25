@@ -24,6 +24,7 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
             })
             .state('portfolio', {
                 url: '/portfolio',
+                controller: 'DashboardController',
                 templateUrl: "js/views/portfolio.html",
                 data: {
                     requireLogin: false
@@ -57,7 +58,6 @@ app.run(function($rootScope, $location, $cookieStore) {
         //console.log("logging cookie!" + $cookieStore.get("user"));
         var isLoggedIn = typeof $cookieStore.get("user") !== 'undefined';
         //console.log("is logged in at 60?" + isLoggedIn);
-
         if (requireLogin && !isLoggedIn) {
             //console.log("line 63");
             event.preventDefault();
@@ -68,9 +68,9 @@ app.run(function($rootScope, $location, $cookieStore) {
             //console.log("is logged in at 69?" +isLoggedIn);
             if (toState.data.url === '/logout') {
                 //console.log("Resetting rootScope user");
-                
-            } else if (isLoggedIn) {
-                //console.log(isLoggedIn + " at 73");
+
+            } else if (isLoggedIn && toState.url === '/') {
+                //console.log(isLoggedIn + " at 73");\
                 $rootScope.setCurrentUser($cookieStore.get("user"));
                 $location.path("dashboard");
             }

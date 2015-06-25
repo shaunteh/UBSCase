@@ -28,9 +28,128 @@ app.controller('PortfolioController', function($scope) {
             {
                 type: 'Others',
                 value: 35043.00,
-           },
+           }
         ],
-        totalValue: 33129504.21
+        totalValue: 33129504.21,        
+        performances:[
+            {
+                date: new Date('1/1/2015'),
+                value: 32428403.21
+            },
+            {
+                date: new Date('2/1/2015'),
+                value: 32428403.21
+            },
+            {
+                date: new Date('3/1/2015'),
+                value: 32428403.21
+            },
+            {
+                date: new Date('4/1/2015'),
+                value: 32428403.21
+            },
+            {
+                date: new Date('5/1/2015'),
+                value: 32428403.21
+            },
+            {
+                date: new Date('1/1/2014'),
+                value: 32428403.21
+            },
+            {
+                date: new Date('2/1/2014'),
+                value: 32428403.21
+            },
+            {
+                date: new Date('3/1/2014'),
+                value: 32428403.21
+            },
+            {
+                date: new Date('4/1/2014'),
+                value: 32428403.21
+            },
+            {
+                date: new Date('5/1/2014'),
+                value: 32428403.21
+            },
+            {
+                date: new Date('6/1/2014'),
+                value: 32428403.21
+            },
+            {
+                date: new Date('7/1/2014'),
+                value: 32428403.21
+            },
+            {
+                date: new Date('8/1/2014'),
+                value: 32428403.21
+            },
+            {
+                date: new Date('9/1/2014'),
+                value: 32428403.21
+            },
+            {
+                date: new Date('10/1/2014'),
+                value: 32428403.21
+            },
+            {
+                date: new Date('11/1/2014'),
+                value: 32428403.21
+            },
+            {
+                date: new Date('12/1/2014'),
+                value: 32428403.21
+            },
+            {
+                date: new Date('12/1/2014'),
+                value: 32428403.21
+            } ,
+            {
+                date: new Date('1/1/2013'),
+                value: 32428403.21
+            } ,
+            {
+                date: new Date('2/1/2013'),
+                value: 32428403.21
+            } ,
+            {
+                date: new Date('4/1/2013'),
+                value: 32428403.21
+            } ,
+            {
+                date: new Date('5/1/2013'),
+                value: 32428403.21
+            } ,
+            {
+                date: new Date('6/1/2013'),
+                value: 32428403.21
+            } ,
+            {
+                date: new Date('7/1/2013'),
+                value: 32428403.21
+            } ,
+            {
+                date: new Date('8/1/2013'),
+                value: 32428403.21
+            } ,
+            {
+                date: new Date('9/1/2013'),
+                value: 32428403.21
+            } ,
+            {
+                date: new Date('10/1/2013'),
+                value: 32428403.21
+            } ,
+            {
+                date: new Date('11/1/2013'),
+                value: 32428403.21
+            } ,
+            {
+                date: new Date('12/1/2013'),
+                value: 32428403.21
+            } 
+        ]
+        
     };
 
 });
