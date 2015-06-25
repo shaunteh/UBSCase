@@ -7,7 +7,7 @@ app.config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
     $locationProvider.html5Mode(true);
     console.log("Here");
     $stateProvider
-            .state('/', {
+            .state('dashboard', {
                 url: '/',
                 controller: 'DashboardController',
                 templateUrl: 'js/views/dashboard.html',
@@ -25,9 +25,8 @@ app.config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
              }
              })
              */
-            .state('/portfolio', {
-                url: '/UBSCase/portfolio',
-                controller: "DashboardController",
+            .state('portfolio', {
+                url: '/portfolio',
                 templateUrl: "js/views/portfolio.html",
                 data: {
                     requireLogin: false
