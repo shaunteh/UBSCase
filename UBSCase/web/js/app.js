@@ -27,6 +27,7 @@ app.config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
              */
             .state('portfolio', {
                 url: '/portfolio',
+                controller: 'PortfolioController',
                 templateUrl: "js/views/portfolio.html",
                 data: {
                     requireLogin: false
