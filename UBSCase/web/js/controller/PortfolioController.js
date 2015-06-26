@@ -211,5 +211,5 @@ app.controller('PortfolioController', function($scope) {
           return 'badge bg-success';
       }
     };
-
+    
 });

@@ -15,7 +15,50 @@ app.controller('DashboardController', function ($scope, $location, $rootScope, S
         $location.path("dashboard");
     };
     
-
+    $('#portfolio-pie').highcharts({
+        chart: {
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false
+        },
+        tooltip: {
+            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: true,
+                    format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+                },
+                showInLegend: true
+            }
+        },
+        series: [{
+                type: 'pie',
+                name: 'Portfolio Share ($)',
+                colorByPoint: true,
+                data: [
+                    ['Liquidity (incl. FX Products)', 12897235.00],
+                    ['Bonds', 500502.02],
+                    ['Equities', 7546422.13],
+                    ['Alternative Investment', 80302.06],
+                    {
+                        name: 'Real Estate',
+                        y: 12057500.00,
+                        sliced: true,
+                        selected: true
+                    },
+                    ['Precious Metals', 12500.00],
+                    ['Others', 35043.00]
+                ]
+            }],
+        title: {
+            text: null
+        },
+        loading: false
+    });
     /*! AdminLTE app.js
      * ================
      * Main JS application file for AdminLTE v2. This file
@@ -29,8 +72,8 @@ app.controller('DashboardController', function ($scope, $location, $rootScope, S
      * @license MIT <http://opensource.org/licenses/MIT>
      */
 
+    
     'use strict';
-
 //Make sure jQuery has been loaded before app.js
     if (typeof jQuery === "undefined") {
         throw new Error("AdminLTE requires jQuery");
@@ -46,7 +89,6 @@ app.controller('DashboardController', function ($scope, $location, $rootScope, S
      *              way to organize our code.
      */
     $scope.AdminLTE = {};
-
     /* --------------------
      * - AdminLTE Options -
      * --------------------
@@ -149,7 +191,6 @@ app.controller('DashboardController', function ($scope, $location, $rootScope, S
             lg: 1200
         }
     };
-
     /* ------------------
      * - Implementation -
      * ------------------
@@ -167,16 +208,12 @@ app.controller('DashboardController', function ($scope, $location, $rootScope, S
 
         //Easy access to options
         var o = $.AdminLTE.options;
-
         //Set up the object
         _init();
-
         //Activate the layout maker
         $.AdminLTE.layout.activate();
-
         //Enable sidebar tree view controls
         $.AdminLTE.tree('.sidebar');
-
         //Enable control sidebar
         if (o.enableControlSidebar) {
             $.AdminLTE.controlSidebar.activate();
@@ -232,10 +269,8 @@ app.controller('DashboardController', function ($scope, $location, $rootScope, S
                 $(this).addClass("active");
                 e.preventDefault();
             });
-
         });
     });
-
     /* ----------------------------------
      * - Initialize the AdminLTE Object -
      * ----------------------------------
@@ -315,7 +350,6 @@ app.controller('DashboardController', function ($scope, $location, $rootScope, S
                 }
             }
         };
-
         /* PushMenu()
          * ==========
          * Adds the push menu functionality to the sidebar.
@@ -325,14 +359,13 @@ app.controller('DashboardController', function ($scope, $location, $rootScope, S
          */
         $.AdminLTE.pushMenu = {
             activate: function (toggleBtn) {
-                //console.log("pushMenu");
+                console.log("pushMenu");
                 //Get the screen sizes
                 var screenSizes = $.AdminLTE.options.screenSizes;
-
                 //Enable sidebar toggle
                 $(toggleBtn).on('click', function (e) {
                     e.preventDefault();
-                    //console.log("clickedMenu");
+                    console.log("clickedMenu");
                     //Enable sidebar push menu
                     if ($(window).width() > (screenSizes.sm - 1)) {
                         $("body").toggleClass('sidebar-collapse');
@@ -347,14 +380,12 @@ app.controller('DashboardController', function ($scope, $location, $rootScope, S
                         }
                     }
                 });
-
                 $(".content-wrapper").click(function () {
                     //Enable hide menu when clicking on the content-wrapper on small screens
                     if ($(window).width() <= (screenSizes.sm - 1) && $("body").hasClass("sidebar-open")) {
                         $("body").removeClass('sidebar-open');
                     }
                 });
-
                 //Enable expand on hover for sidebar mini
                 if ($.AdminLTE.options.sidebarExpandOnHover
                         || ($('body').hasClass('fixed')
@@ -390,7 +421,6 @@ app.controller('DashboardController', function ($scope, $location, $rootScope, S
                 }
             }
         };
-
         /* Tree()
          * ======
          * Converts the sidebar into a multilevel
@@ -401,13 +431,12 @@ app.controller('DashboardController', function ($scope, $location, $rootScope, S
          */
         $.AdminLTE.tree = function (menu) {
             var _this = this;
-            //console.log("TESTT");
+            console.log("TESTT");
             var animationSpeed = $.AdminLTE.options.animationSpeed;
             $("li a", $(menu)).on('click', function (e) {
                 //Get the clicked link and the next element
                 var $this = $(this);
                 var checkElement = $this.next();
-
                 //Check if the next element is a menu and is visible
                 if ((checkElement.is('.treeview-menu')) && (checkElement.is(':visible'))) {
                     //Close the menu
@@ -428,7 +457,6 @@ app.controller('DashboardController', function ($scope, $location, $rootScope, S
                     ul.removeClass('menu-open');
                     //Get the parent li
                     var parent_li = $this.parent("li");
-
                     //Open the target menu and add the menu-open class
                     checkElement.slideDown(animationSpeed, function () {
                         //Add the class active to the parent li
@@ -445,7 +473,6 @@ app.controller('DashboardController', function ($scope, $location, $rootScope, S
                 }
             });
         };
-
         /* ControlSidebar
          * ==============
          * Adds functionality to the right sidebar
@@ -464,7 +491,6 @@ app.controller('DashboardController', function ($scope, $location, $rootScope, S
                 var sidebar = $(o.selector);
                 //The toggle button
                 var btn = $(o.toggleBtnSelector);
-
                 //Listen to the click event
                 btn.on('click', function (e) {
                     e.preventDefault();
@@ -477,11 +503,9 @@ app.controller('DashboardController', function ($scope, $location, $rootScope, S
                         _this.close(sidebar, o.slide);
                     }
                 });
-
                 //If the body has a boxed layout, fix the sidebar bg position
                 var bg = $(".control-sidebar-bg");
                 _this._fix(bg);
-
                 //If the body has a fixed layout, make the control sidebar fixed
                 if ($('body').hasClass('fixed')) {
                     _this._fixForFixed(sidebar);
@@ -539,7 +563,6 @@ app.controller('DashboardController', function ($scope, $location, $rootScope, S
                 $(".content-wrapper, .right-side").css('min-height', sidebar.height());
             }
         };
-
         /* BoxWidget
          * =========
          * BoxWidget is a plugin to handle collapsing and
@@ -563,7 +586,6 @@ app.controller('DashboardController', function ($scope, $location, $rootScope, S
                     e.preventDefault();
                     _this.collapse($(this));
                 });
-
                 //Listen for remove event triggers
                 $(_box).find(_this.selectors.remove).on('click', function (e) {
                     e.preventDefault();
@@ -636,10 +658,8 @@ app.controller('DashboardController', function ($scope, $location, $rootScope, S
                 } //When the source has been loaded
 
             }, options);
-
             //The overlay
             var overlay = $('<div class="overlay"><div class="fa fa-refresh fa-spin"></div></div>');
-
             return this.each(function () {
                 //if a source is specified
                 if (settings.source === "") {
@@ -652,38 +672,31 @@ app.controller('DashboardController', function ($scope, $location, $rootScope, S
                 var box = $(this);
                 //the button
                 var rBtn = box.find(settings.trigger).first();
-
                 //On trigger click
                 rBtn.on('click', function (e) {
                     e.preventDefault();
                     //Add loading overlay
                     start(box);
-
                     //Perform ajax call
                     box.find(".box-body").load(settings.source, function () {
                         done(box);
                     });
                 });
             });
-
             function start(box) {
                 //Add overlay and loading img
                 box.append(overlay);
-
                 settings.onLoadStart.call(box);
             }
 
             function done(box) {
                 //Remove overlay and loading img
                 box.find(overlay).remove();
-
                 settings.onLoadDone.call(box);
             }
 
         };
-
     })(jQuery);
-
     /*
      * EXPLICIT BOX ACTIVATION
      * -----------------------
@@ -698,9 +711,7 @@ app.controller('DashboardController', function ($scope, $location, $rootScope, S
         $.fn.activateBox = function () {
             $.AdminLTE.boxWidget.activate(this);
         };
-
     })(jQuery);
-
     /*
      * TODO LIST CUSTOM PLUGIN
      * -----------------------
@@ -721,7 +732,6 @@ app.controller('DashboardController', function ($scope, $location, $rootScope, S
                 onUncheck: function (ele) {
                 }
             }, options);
-
             return this.each(function () {
 
                 if (typeof $.fn.iCheck != 'undefined') {
@@ -730,7 +740,6 @@ app.controller('DashboardController', function ($scope, $location, $rootScope, S
                         ele.toggleClass("done");
                         settings.onCheck.call(ele);
                     });
-
                     $('input', this).on('ifUnchecked', function (event) {
                         var ele = $(this).parents("li").first();
                         ele.toggleClass("done");
@@ -746,5 +755,4 @@ app.controller('DashboardController', function ($scope, $location, $rootScope, S
             });
         };
     }(jQuery));
-
 });
