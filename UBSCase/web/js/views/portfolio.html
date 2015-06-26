@@ -106,7 +106,7 @@
                             <div class="box-body no-padding">
                                 <table class="table">
                                     <tr>
-                                        <th>My Assets</th>
+                                        <th>Month</th>
                                         <th>Value in (USD)</th>
                                         <th>Gain/Loss %</th>
                                     </tr>
@@ -115,7 +115,12 @@
                                         <td>
                                             ${{performance.value | number : 2}}
                                         </td>
-                                        <td><span class="badge bg-success">{{((investment.value / portfolio.totalValue) * 100) | number : 2 }}%</span></td>
+                                        <td>
+                                            <span class="{{evaluate(performance.difference)}}">
+                                                
+                                                {{performance.difference }}%
+                                            </span>
+                                        </td>
                                     </tr>
                                 </table>
                             </div><!-- /.box-body -->
