@@ -27,7 +27,7 @@
                                 <!-- The user image in the navbar-->
                                 <img src="img/default-profile-160x160.png" class="user-image" alt="User Image"/>
                                 <!-- hidden-xs hides the username on small devices so only the image appears. -->
-                                <span class="hidden-xs">{{currentUser.firstName}}</span>
+                                <span class="hidden-xs">{{currentUser.firstName}} {{currentUser.lastName}}</span>
                             </a>
                             <ul class="dropdown-menu">
                                 <!-- The user image in the menu -->
@@ -61,7 +61,7 @@
                         <img src="img/default-profile-160x160.png" class="img-circle" alt="User Image" />
                     </div>
                     <div class="pull-left info">
-                        <p>{{currentUser.firstName}}</p>
+                        <p>{{currentUser.firstName}} {{currentUser.lastName}}</p>
                         <!-- Status -->
                         <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
                     </div>
@@ -116,6 +116,11 @@
                                             ${{investment.value | number : 2}}
                                         </td>
                                         <td><span class="badge bg-success">{{((investment.value / portfolio.totalValue) * 100) | number : 2 }}%</span></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Total</th>
+                                        <th>${{portfolio.totalValue | number: 2}}</th>
+                                        <th><span class="badge bg-success">100%</span></th>
                                     </tr>
                                 </table>
                             </div><!-- /.box-body -->

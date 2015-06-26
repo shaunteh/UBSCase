@@ -1,4 +1,24 @@
 app.controller('PortfolioController', function($scope) {
+    $scope.viewYears= [];
+    
+    $scope.includeYears = function(year) {
+        var i = $.inArray(year, $scope.viewYears);
+        if (i > -1) {
+            $scope.viewYears.splice(i, 1);
+        } else {
+            $scope.viewYears.push(year);
+        }
+    };
+    
+    $scope.yearFilter = function(year) {
+        console.log(year.date.getFullYear());
+        if ($scope.viewYears.length > 0) {
+            if ($.inArray(year.date.getFullYear(), $scope.viewYears) < 0)
+                return;
+        }
+        return year;
+    };
+    
     $scope.portfolio = {
         investments: [
             {

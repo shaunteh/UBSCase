@@ -14,6 +14,7 @@ app.controller('DashboardController', function ($scope, $location, $rootScope, S
         console.log("CAlled");
         $location.path("dashboard");
     };
+    
 
     /*! AdminLTE app.js
      * ================

@@ -85,11 +85,10 @@
             <section class="content-header">
                 <h1>
                     Portfolio Holdings
-                    <small>Welcome back!</small>
                 </h1>
                 <ol class="breadcrumb">
                     <li><a href ng-click="dashboard()"><i class="fa fa-dashboard"></i> Home</a></li>
-                    <li class="active">Dashboard</li>
+                    <li class="active">My Portfolio</li>
                 </ol>
             </section>
 
@@ -103,6 +102,18 @@
                             <div class="box-header">
                                 <h3 class="box-title">My Portfolio Performance</h3>
                             </div><!-- /.box-header -->
+                            <div class="checkbox">
+                                View by Year:
+                                <label>
+                                    <input type="checkbox" ng-click="includeYears(2015)">2015
+                                </label>
+                                <label>
+                                    <input type="checkbox" ng-click="includeYears(2014)">2014
+                                </label>
+                                <label>
+                                    <input type="checkbox" ng-click="includeYears(2013)">2013
+                                </label>
+                            </div>
                             <div class="box-body no-padding">
                                 <table class="table">
                                     <tr>
@@ -110,7 +121,7 @@
                                         <th>Value in (USD)</th>
                                         <th>Gain/Loss %</th>
                                     </tr>
-                                    <tr ng-repeat="performance in portfolio.performances | orderBy: '-date'">
+                                    <tr ng-repeat="performance in portfolio.performances | filter:yearFilter | orderBy: '-date'">
                                         <td>{{performance.date | date:'MMM-yyyy'}}</td>
                                         <td>
                                             ${{performance.value | number : 2}}
