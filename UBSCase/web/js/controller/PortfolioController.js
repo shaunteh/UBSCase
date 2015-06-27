@@ -56,12 +56,13 @@ app.controller('PortfolioController', function ($scope, $filter) {
         performances: [
             {
                 x: new Date('5/1/2015'),
-                y: 23156113.10,
+                y: 29881514.59,
+                
                 difference: 4.45
             },
             {
                 x: new Date('4/1/2015'),
-                y: 24969236.76,
+                y: 28464007.04,
                 difference: 7.83
             },
             {
@@ -71,12 +72,12 @@ app.controller('PortfolioController', function ($scope, $filter) {
             },
             {
                 x: new Date('2/1/2015'),
-                y: 28464007.04,
+                y: 24969236.76,
                 difference: 6.32
             },
             {
                 x: new Date('1/1/2015'),
-                y: 29881514.59,
+                y: 23156113.10,
                 difference: 4.98
             },
             {
