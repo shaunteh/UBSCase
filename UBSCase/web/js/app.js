@@ -1,8 +1,8 @@
-var app = angular.module("UBSCase", ['ui.router', 'ngCookies']);
+var app = angular.module("UBSCase", ['ui.router', 'ngCookies', 'ui.bootstrap']);
 
 
 // For Application Routing
-app.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
+app.config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
     $urlRouterProvider.otherwise("/UBSCase/");
     $locationProvider.html5Mode(true);
     $stateProvider
@@ -51,8 +51,8 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
 
 
 // For managing state changes
-app.run(function($rootScope, $location, $cookieStore) {
-    $rootScope.$on('$stateChangeStart', function(event, toState, toParams) {
+app.run(function ($rootScope, $location, $cookieStore) {
+    $rootScope.$on('$stateChangeStart', function (event, toState, toParams) {
         var requireLogin = toState.data.requireLogin;
         //var isRefreshed = typeof $rootScope.currentUser === 'undefined';
         //console.log("logging cookie!" + $cookieStore.get("user"));
@@ -80,16 +80,16 @@ app.run(function($rootScope, $location, $cookieStore) {
 });
 
 // for CSRF
-app.config(function($httpProvider) {
+app.config(function ($httpProvider) {
     //fancy random token
     function b(a) {
         return a ? (a ^ Math.random() * 16 >> a / 4).toString(16) : ([1e16] + 1e16).replace(/[01]/g, b)
     }
     ;
 
-    $httpProvider.interceptors.push(function() {
+    $httpProvider.interceptors.push(function () {
         return {
-            'request': function(config) {
+            'request': function (config) {
                 // put a new random secret into our CSRF-TOKEN Cookie after each response
                 document.cookie = 'CSRF-TOKEN=' + b();
                 return config;
@@ -114,6 +114,68 @@ app.constant('AUTH_EVENTS', {
     notAuthorized: 'auth-not-authorized'
 });
 
-
+app.directive('performanceChart', function () {
+    return {
+        restrict: 'E',
+        scope: {
+            data: '='
+        },
+        link: function (scope, element, attrs) {
+            console.log(2);
+            var chart = new Highcharts.Chart({
+                chart: {
+                    renderTo: 'container',
+                    zoomType: 'x'
+                },
+                title: {
+                    text: 'My Portfolio Performance'
+                },
+                xAxis: {
+                    type: 'datetime',
+                },
+                yAxis: {
+                    title: {
+                        text: 'Value in USD'
+                    }
+                },
+                plotOptions: {
+                    area: {
+                        fillColor: {
+                            linearGradient: {
+                                x1: 0,
+                                y1: 0,
+                                x2: 0,
+                                y2: 1
+                            },
+                            stops: [
+                                [0, Highcharts.getOptions().colors[0]],
+                                [1, Highcharts.Color(Highcharts.getOptions().colors[0]).setOpacity(0).get('rgba')]
+                            ]
+                        },
+                        marker: {
+                            radius: 2
+                        },
+                        lineWidth: 1,
+                        states: {
+                            hover: {
+                                lineWidth: 1
+                            }
+                        },
+                        threshold: null
+                    }
+                },
+                series: [{
+                        type: 'area',
+                        name: 'Value',
+                        data: scope.data
+                    }]
+            });
+            scope.$watch('data', function (newValue) {
+                chart.series[0].setData(newValue, true);
+            }, true);
+        },
+        template: '<div id="container">Error</div>'
+    };
+});
 
 

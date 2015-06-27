@@ -60,6 +60,25 @@
                     <div class="pull-left image">
                         <img src="img/default-profile-160x160.png" class="img-circle" alt="User Image" />
                     </div>
+
+                    <div ng-controller="ModalController">
+                        <!-- Notification modal script-->
+                        <script type="text/ng-template" id="notify.html">
+                            <div class="modal-header">
+                            <h3 class="modal-title">Notification success!</h3>
+                            </div>
+                            <div class="modal-body">
+                            Your financial manager has been notified and will contact you in no time!
+                            </div>
+                            <div class="modal-footer">
+                            <button class="btn btn-primary" ng-click="ok()">OK</button>
+                            </div>
+                        </script>
+                        <div class="pull-right image">
+                            <img src="img/notify-45x45.png" class="img-circle" ng-click="open()" alt="Notify FM" />
+                        </div>
+                    </div>
+
                     <div class="pull-left info">
                         <p>{{currentUser.firstName}} {{currentUser.lastName}}</p>
                         <!-- Status -->
@@ -73,6 +92,10 @@
                     <li class="active"><a href ng-click="dashboard()"><i class='fa fa-home'></i> <span>Home</span></a></li>
                     <li><a href="#" ng-click="navigate()"><i class='fa fa-star-o'></i> <span>View Portfolio Holdings</span></a></li>
                     <li><a href="#"><i class='fa fa-bar-chart'></i> <span>View E-Statements</span></a></li>
+                    <li><a href="#"><i class='fa fa-list-alt'></i> <span>Current Account List</span></a></li>
+                    <li><a href="#"><i class='fa fa-money'></i> <span>Cash Management</span></a></li>
+                    <li><a href="#"><i class='fa fa-credit-card'></i> <span>Transactions</span></a></li>
+                    <li><a href="#"><i class='fa fa-line-chart'></i> <span>FX Rates</span></a></li>
 
                 </ul><!-- /.sidebar-menu -->
             </section>

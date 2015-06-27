@@ -9,12 +9,12 @@ app.controller('DashboardController', function ($scope, $location, $rootScope, S
         console.log("clicked on portfolio tab");
         $location.path("portfolio");
     };
-    
-    $scope.dashboard = function(){
+
+    $scope.dashboard = function () {
         console.log("CAlled");
         $location.path("dashboard");
     };
-    
+
     $('#portfolio-pie').highcharts({
         chart: {
             plotBackgroundColor: null,
@@ -72,7 +72,7 @@ app.controller('DashboardController', function ($scope, $location, $rootScope, S
      * @license MIT <http://opensource.org/licenses/MIT>
      */
 
-    
+
     'use strict';
 //Make sure jQuery has been loaded before app.js
     if (typeof jQuery === "undefined") {
