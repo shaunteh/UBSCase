@@ -63,12 +63,24 @@
 
                     <div ng-controller="ModalController">
                         <!-- Notification modal script-->
-                        <script type="text/ng-template" id="notify.html">
+                        <script type="text/ng-template" id="notificationPrompt.html">
                             <div class="modal-header">
-                            <h3 class="modal-title">Notification success!</h3>
+                            <h3 class="modal-title">Notification Manager</h3>
                             </div>
                             <div class="modal-body">
-                            Your financial manager has been notified and will contact you in no time!
+                            Do you want to contact your financial manager?
+                            </div>
+                            <div class="modal-footer">
+                            <button class="btn btn-primary" ng-click="yes()">Yes</button>
+                            <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+                            </div>
+                        </script>
+                        <script type="text/ng-template" id="notificationSuccess.html">
+                            <div class="modal-header">
+                            <h3 class="modal-title">Notification Success!</h3>
+                            </div>
+                            <div class="modal-body">
+                            Your financial manager have been notified and will contact you shortly!
                             </div>
                             <div class="modal-footer">
                             <button class="btn btn-primary" ng-click="ok()">OK</button>
@@ -120,18 +132,18 @@
                 <!-- Your Page Content Here -->
                 <!-- Main content -->
                 <div class="row" ng-controller="PortfolioController">
-                    <div class="col-md-6">
+                    <div class="col-md-7">
                         <div class="box box-info">
                             <div class="box-header">
                                 <h3 class="box-title">My Overall Portfolio Performance</h3>
                             </div>
-                            <div class="box-body no-padding">
+                            <div class="box-body">
                                 <performance-chart data="filtered"></performance-chart>
 
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6 col-ls-12">
+                    <div class="col-md-5">
                         <div class="box box-success">
                             <div class="box-header">
                                 <h3 class="box-title">My Portfolio Performance</h3>

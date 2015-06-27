@@ -132,6 +132,12 @@ app.directive('performanceChart', function () {
                 },
                 xAxis: {
                     type: 'datetime',
+                    dateTimeLabelFormats:
+                            {
+                                day: '%e. %b',
+                                month: '%b \ %y',
+                                year: '%Y'
+                            }
                 },
                 yAxis: {
                     title: {
@@ -162,6 +168,12 @@ app.directive('performanceChart', function () {
                             }
                         },
                         threshold: null
+                    }
+                },
+                tooltip: {
+                    formatter: function () {
+                        return '<i>' + Highcharts.dateFormat('%b %Y', new Date(this.x)) + '</i><br/>' +
+                                '<b>' + this.series.name + '</b>:' + (this.y / 1000000).toFixed(2) + 'M';
                     }
                 },
                 series: [{
